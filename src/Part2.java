@@ -8,7 +8,7 @@ public class Part2 {
 //
 //    For the purposes of this problem, you only need to worry about parentheses “(“and “)”, not other opening-and-closing
 //    marks, like curly brackets, square brackets, or angle brackets.
-
+//        System.out.println(balancedBrackets("<({)}>"));
 //        String parenth = "(())((e";
 //        Stack<String> stack = new Stack<String>();
 //        String[] c = parenth.split("");
@@ -40,55 +40,56 @@ public class Part2 {
 //        }
 
         String parenth = "(())((<<>>))<<";
+
+
+    }
+
+    public static boolean balancedBrackets(String parenth) {
         Stack<String> stack = new Stack<String>();
         String[] c = parenth.split("");
-        for (String cc: c) {
-            if(cc.equals("(") || cc.equals("{") || cc.equals("[") || cc.equals("<")) {
+        if(parenth.isEmpty()){
+            return true;
+        }
+        for (String cc : c) {
+            if (cc.equals("(") || cc.equals("{") || cc.equals("[") || cc.equals("<")) {
                 stack.push(cc);
+            }else if (stack.isEmpty()) {
+                    return false;
             }
-            else if(cc.equals(")")){
-                if(stack.peek().equals("(")){
+            else if (cc.equals(")")) {
+                if (stack.peek().equals("(")) {
                     stack.pop();
-                }else{
-                    System.out.println("isnt balanced");
-                    System.exit(0);
-                }
-            }else if(cc.equals("}")){
-                if(stack.peek().equals("{")){
+                } else {
+                    return false;
+                    }
+            } else if (cc.equals("}")) {
+                if (stack.peek().equals("{")) {
                     stack.pop();
-                }else{
-                    System.out.println("isnt balanced");
-                    System.exit(0);
-                }
-            }else if(cc.equals("]")){
-                if(stack.peek().equals("[")){
+                } else {
+                    return false;
+                    }
+            } else if (cc.equals("]")) {
+                if (stack.peek().equals("[")) {
                     stack.pop();
-                }else{
-                    System.out.println("isnt balanced");
-                    System.exit(0);
+                } else {
+                return false;
                 }
-            }else if(cc.equals(">")){
-                if(stack.peek().equals("<")){
+            } else if (cc.equals(">")) {
+                if (stack.peek().equals("<")) {
                     stack.pop();
-                }else{
-                    System.out.println("isnt balanced");
-                    System.exit(0);
-                }
-            }else{
-                System.out.println("not valid");
-                System.exit(0);
-            }
-        }
-        for (String cc: stack) {
-            System.out.println(cc);
+                }else {
 
+                    return false;
+                }
+            }
         }
-        if(stack.isEmpty()){
-            System.out.println("is balanced");
-        }else{
-            System.out.println("isnt balanced due to no enufff close");
+        if (stack.isEmpty()) {
+            return true;
+        } else {
+            return false;
         }
     }
+}
 
     //solution
 //    public static boolean balancedBrackets(String s) {
@@ -132,4 +133,3 @@ public class Part2 {
 //    How would the implementation of the Stack from Step 3 change if you were to implement a queue?
 //        queues would enqueue and dequeue, so enqueue until reach appropriate close for the dequeued open and keep queue and enqueue in that manner
 
-}
